@@ -1,0 +1,30 @@
+---
+- name: Attach Floating IP to an OpenStack server
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - openstack.cloud
+
+  vars:
+    # Optional: only if you want to override which cloud to use
+    # cloud: "mycloud"
+
+  tasks:
+    - name: Ensure the Floating IP is associated to the server
+      openstack.cloud.floating_ip:
+        # If your OpenStack credential is of type "OpenStack", you can omit 'cloud'
+        # cloud: "{{ cloud }}"
+        server: "{{ server_name }}"            # e.g. 'compute-01'
+        floating_ip_address: "{{ floating_ip }}"  # e.g. '203.0.113.42'
+        # Optional helpers if your env needs them:
+        # fixed_address: "{{ fixed_address | default(omit) }}"
+        # network: "{{ ext_network | default(omit) }}"     # external net for FIPs
+        # nat_destination: "{{ internal_net | default(omit) }}"
+        reuse: false
+        wait: true
+        timeout: 180
+        state: present
+
+    - name: Show result
+      debug:
+        msg: "Floating IP {{ floating_ip }} is attached to {{ server_name }}"
