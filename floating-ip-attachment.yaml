@@ -18,7 +18,7 @@
         floating_ip_address: "{{ floating_ip }}"  # e.g. '203.0.113.42'
         # Optional helpers if your env needs them:
         # fixed_address: "{{ fixed_address | default(omit) }}"
-        # network: "{{ ext_network | default(omit) }}"     # external net for FIPs
+        network: "{{ ext_network | default(omit) }}"     # external net for FIPs
         # nat_destination: "{{ internal_net | default(omit) }}"
         reuse: false
         wait: true
