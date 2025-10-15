@@ -20,6 +20,7 @@
         # fixed_address: "{{ fixed_address | default(omit) }}"
         network: "{{ ext_network | default(omit) }}"     # external net for FIPs
         # nat_destination: "{{ internal_net | default(omit) }}"
+        verify: false
         reuse: false
         wait: true
         timeout: 180
